@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+.portfolio{
+  width: 80%;
+  display: grid;
+  gap: 0.25rem;
+  grid-auto-columns: 1fr 1fr 1fr;
+  border: 1px solid red;
+}
+.onePicture{
+  width: 15rem;
+  padding: 1rem;
+  border: 1px solid green;
+}
