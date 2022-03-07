@@ -4,7 +4,7 @@ import { AuthContext } from "../context/auth.context";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-
+  console.log(user);
   return (
     <nav>
       <Link to="/">
@@ -13,7 +13,7 @@ function Navbar() {
 
       {isLoggedIn && (
         <>
-          <Link to="/editProfile">
+          <Link to={"/editProfile/"+user._id}>
             <button>Profile</button>
           </Link>        
           <button onClick={logOutUser}>Logout</button>

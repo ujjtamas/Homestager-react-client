@@ -29,23 +29,25 @@ function AuthProviderWrapper(props) {
       .then((response) => {
         // If the server verifies that JWT token is valid  
         const user = response.data;
+        
        // Update state variables        
-        setIsLoggedIn(true);
+        
         setIsLoading(false);
-        setUser(user);        
+        setUser(user);
+        setIsLoggedIn(true);
       })
       .catch((error) => {
         // If the server sends an error response (invalid token) 
-        // Update state variables         
+        // Update state variables
         setIsLoggedIn(false);
         setIsLoading(false);
-        setUser(null);        
-      });      
+        setUser(null);
+      });
     } else {
       // If the token is not available (or is removed)
         setIsLoggedIn(false);
         setIsLoading(false);
-        setUser(null);      
+        setUser(null);
     }   
   }
  
@@ -62,13 +64,14 @@ function AuthProviderWrapper(props) {
  
   const logOutUser = () => {
     // To log out the user, remove the token
+    console.log('logging out');
     removeToken();
     // and update the state variables    
     authenticateUser();
   } 
 
   useEffect(() => {
-    //authenticateUser();
+    authenticateUser();
     verifyStoredToken();
   }, []);
 
