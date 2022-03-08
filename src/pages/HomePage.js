@@ -9,7 +9,7 @@ function HomePage() {
                 <a href="/search" className='link'><p>Search Homestager</p></a>
             </div>
             <div id="browsePicture" className="box">
-                <p>Browse picture</p>
+                <a href="/browse" className='link'><p>Browse picture</p></a>
             </div>
 
             <div id="login" className="box">

@@ -19,6 +19,9 @@ function EditProfile(props) {
     const [isHomestager, setIsHomestager] = useState(false);
     const { isLoggedIn, user } = useContext(AuthContext);
     const [userName, setUserName] = useState(user.name);
+    const [showMessage, setShowMessage] = useState(false);
+    const [message, setMessage] = useState([]);
+    const [messageResponse, setMessageResponse] = useState('');
     const navigate = useNavigate();
     
     const changeUser = (e) => {
@@ -28,7 +31,7 @@ function EditProfile(props) {
         axios
             .post(`${API_URL}/user/profile/`,{name: newName, id: user._id})
             .then((response) => {
-                console.log(response)
+                // console.log(response)
             })
             .catch((err) => console.log(err))
     };
@@ -58,6 +61,27 @@ function EditProfile(props) {
             .catch((err) => console.log(err));
         
     }
+
+    const Respond = (e) => {
+        e.preventDefault();
+        const element = e.target.response
+        const response = e.target.response.value;
+        const sender = element.getAttribute('from');
+        const receiver = element.getAttribute('to');
+        const originalMessage = e.target.response.id
+
+        const requestBody = {sender: sender, receiver: receiver, message: response, id: originalMessage, isResponse: true};
+        
+        axios
+            .post(`${API_URL}/message/send`,requestBody)
+            .then((response) => {
+                if(response.status === 200){
+                    setMessageResponse('');
+                    setShowMessage(false);
+                }
+            })
+            .catch((err) => console.log(err));
+    }
     //upload portfolio
     useEffect(() => {
         if(url){
@@ -74,6 +98,7 @@ function EditProfile(props) {
 
     //get user details
      useEffect(() => {
+         //getuser profile
         axios
             .get(`${API_URL}/user/profile/${user._id}`)
             .then((response) =>{
@@ -81,6 +106,17 @@ function EditProfile(props) {
                 setIsHomestager(response.data.isHomestager);
                 setAllImages(response.data.portfolio);
             })
+        //get messages
+        axios
+            .get(`${API_URL}/message/get/${user._id}`)
+            .then((response) =>{
+                const messages = response.data;
+                if(messages.length > 0){
+                    setShowMessage(true);
+                    setMessage(messages);
+                }
+            })
+
     },[]);
 
     //get pictures when new added
@@ -112,6 +148,31 @@ function EditProfile(props) {
                 <button type="submit">Change</button>
             </form>
             }
+
+            {showMessage && 
+                <div className="container">
+                    {
+                        message.map((oneMessage) => 
+                            <form className="message" onSubmit={Respond}>
+                            <p>From {oneMessage.sender.email}</p>
+                            <p>Message: {oneMessage.message}</p>
+                            <input
+                                type="text"
+                                id={oneMessage._id}
+                                name="response"
+                                from={user._id}
+                                to={oneMessage.sender._id}
+                                value={messageResponse}
+                                onChange={(e) => setMessageResponse(e.target.value)}
+
+                            />
+                            <button id={oneMessage._id} type="submit" className="btn">Respond</button>
+                            </form>
+                        )
+                    }
+                </div>
+            }
+
             {isHomestager &&
             <form onSubmit={uploadImage}>
                 <label htmlFor="file">File:</label>
