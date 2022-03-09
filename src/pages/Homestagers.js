@@ -135,7 +135,7 @@ function Homestagers(props){
                 )}
             </div>
         }
-
+            
        {/*  {homestager &&
             <button id={homestager} name={homestager} onClick={contactUser}>Contact</button>
         } */}

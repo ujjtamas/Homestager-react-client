@@ -5,7 +5,8 @@ import axios from "axios";
 import { AuthContext } from '../context/auth.context';
 import {Image} from 'cloudinary-react';
 import { isDisabled } from "@testing-library/user-event/dist/utils";
-
+import {Map, GoogleApiWrapper} from 'google-maps-react';
+import GoogleMap from "../components/GoogleMap";
 
 const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/homestager-react/image/upload';
 const API_URL = "http://localhost:5005";
@@ -21,7 +22,7 @@ function EditProfile(props) {
     const [userName, setUserName] = useState(user.name);
     const [showMessage, setShowMessage] = useState(false);
     const [message, setMessage] = useState([]);
-    const [messageResponse, setMessageResponse] = useState('');
+    const [messageResponse, setMessageResponse] = useState();
     const navigate = useNavigate();
     
     const changeUser = (e) => {
@@ -76,11 +77,21 @@ function EditProfile(props) {
             .post(`${API_URL}/message/send`,requestBody)
             .then((response) => {
                 if(response.status === 200){
-                    setMessageResponse('');
-                    setShowMessage(false);
+                    //setMessageResponse('');
+                    //remove answered message
+                    message.map((element,index)=>{
+                        if(originalMessage === element._id)
+                            {
+                                message.splice(index,1);
+                                setShowMessage(false);
+                            }
+                    })
+                    setShowMessage(true);
                 }
             })
             .catch((err) => console.log(err));
+            console.log(message);
+
     }
     //upload portfolio
     useEffect(() => {
@@ -114,6 +125,7 @@ function EditProfile(props) {
                 if(messages.length > 0){
                     setShowMessage(true);
                     setMessage(messages);
+                    setMessageResponse();
                 }
             })
 
@@ -142,13 +154,12 @@ function EditProfile(props) {
                         type="text"
                         value={userName}
                         onChange={(e) => setUserName(e.target.value)}
-
                     />
                 </label>
                 <button type="submit">Change</button>
             </form>
             }
-
+            <GoogleMap />
             {showMessage && 
                 <div className="container">
                     {
@@ -164,7 +175,6 @@ function EditProfile(props) {
                                 to={oneMessage.sender._id}
                                 value={messageResponse}
                                 onChange={(e) => setMessageResponse(e.target.value)}
-
                             />
                             <button id={oneMessage._id} type="submit" className="btn">Respond</button>
                             </form>
@@ -172,7 +182,7 @@ function EditProfile(props) {
                     }
                 </div>
             }
-
+            
             {isHomestager &&
             <form onSubmit={uploadImage}>
                 <label htmlFor="file">File:</label>

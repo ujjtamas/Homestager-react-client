@@ -8,6 +8,7 @@ import EditProfile from './pages/EditProfile'
 import Homestagers from './pages/Homestagers';
 import { Routes, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
+import {Map, GoogleApiWrapper} from 'google-maps-react';
 
 function App() {
   return (
