@@ -8,8 +8,8 @@ import { isDisabled } from "@testing-library/user-event/dist/utils";
 import {Map, GoogleApiWrapper} from 'google-maps-react';
 import GoogleMap from "../components/GoogleMap";
 
-const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/homestager-react/image/upload';
-const API_URL = "http://localhost:5005";
+const cloudinaryUrl = process.env.REACT_APP_CLOUDINARY_URL;
+const API_URL = process.env.REACT_APP_API_URL;
 
 function EditProfile(props) {
     

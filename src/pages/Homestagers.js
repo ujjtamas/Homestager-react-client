@@ -5,8 +5,9 @@ import axios from "axios";
 import { AuthContext } from '../context/auth.context';
 import {Image} from 'cloudinary-react';
 
-const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/homestager-react/image/upload';
-const API_URL = "http://localhost:5005";
+//const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/homestager-react/image/upload';
+const cloudinaryUrl = process.env.REACT_APP_CLOUDINARY_URL;
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Homestagers(props){
     const [isHomestager, setIsHomestager] = useState(false);

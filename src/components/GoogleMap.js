@@ -6,19 +6,15 @@ import {Map, GoogleApiWrapper} from 'google-maps-react';
 
 function GoogleMap(){
     const [src,setSrc] = useState('');
-    console.log(navigator.geolocation);
+    
     navigator.geolocation.getCurrentPosition((loc) => {
-        console.log(loc);
         const originLat = loc.coords.latitude;
         const originLon = loc.coords.longitude;
-        console.log(originLat + ' ' + originLon);
         const destinationLat = 48;
         const destinationLon = 22;
         //const src= "https://www.google.com/maps/embed/v1/place?key=AIzaSyBzsRtSWl4su2hGhKgQp2kRncOiKTEe7A0&q=Space+Needle,Nyíregyháza+Korzó"
         setSrc("https://www.google.com/maps/embed/v1/directions?key=AIzaSyBzsRtSWl4su2hGhKgQp2kRncOiKTEe7A0&origin=" + originLat + ',' + originLon + '&destination=' + destinationLat + ',' + destinationLon)
     })
-
-
 
     return(
         <div>
