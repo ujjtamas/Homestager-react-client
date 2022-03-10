@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from '../context/auth.context';
 import {Image} from 'cloudinary-react';
+import GoogleMap from "../components/GoogleMap";
 
 //const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/homestager-react/image/upload';
 const cloudinaryUrl = process.env.REACT_APP_CLOUDINARY_URL;
@@ -147,7 +148,7 @@ function Homestagers(props){
             <div>
                 <form onSubmit={sendMessage} className="form-horizontal">
                     <div className="form-group">
-                        <label htmlFor='message'>Message: 
+                        <label htmlFor='message'>Message to {homestagerName}: 
                             <input 
                                 type="text"
                                 name="message"
@@ -159,14 +160,18 @@ function Homestagers(props){
                         </label>
                         <button type="submit" className="btn btn-primary btn-sm">Send</button>
                     </div>
-                    
                 </form>
+                <div className="googleMap top-margin2 ">
+                    <GoogleMap />
+                </div>
             </div>
         }
-
+        
         {allImages && !isBrowse &&
             <div>
-            <h3>{homestagerName}</h3>
+            
+                
+            
             <div className="portfolio top-margin2 margin-center">
                 {allImages.map((img)=>
                     <div>
