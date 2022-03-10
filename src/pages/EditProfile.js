@@ -90,8 +90,6 @@ function EditProfile(props) {
                 }
             })
             .catch((err) => console.log(err));
-            console.log(message);
-
     }
     //upload portfolio
     useEffect(() => {
@@ -143,28 +141,36 @@ function EditProfile(props) {
     },[url]);
     //response.data.url
     return(
-        <div>
-            <h1>Edit Profile</h1>
-            {
-            <form onSubmit={changeUser}>
-                <label htmlFor="name">Name: 
-                    <input 
-                        name="name"
-                        id="name"
-                        type="text"
-                        value={userName}
-                        onChange={(e) => setUserName(e.target.value)}
-                    />
-                </label>
-                <button type="submit">Change</button>
-            </form>
-            }
-            <GoogleMap />
+        <div className=" flex flex-column">
+            <div className="flex flex-row top-margin1 flex-stretch">
+                <div>
+                    {
+                    <form onSubmit={changeUser} className="form-horizontal">
+                        <div className="form-group">
+                            <label htmlFor="name">Name: 
+                                <input 
+                                    name="name"
+                                    id="name"
+                                    type="text"
+                                    value={userName}
+                                    onChange={(e) => setUserName(e.target.value)}
+                                    className="form-control"
+                                />
+                            </label>
+                        </div>
+                        <button type="submit" className="btn btn-primary top-margin1">Change</button>
+                    </form>
+                    }
+                </div>
+            <div className="googleMap">
+                <GoogleMap />
+            </div>
             {showMessage && 
-                <div className="container">
+                <div className="">
                     {
                         message.map((oneMessage) => 
-                            <form className="message" onSubmit={Respond}>
+                            <form className="message form-horizontal" onSubmit={Respond}>
+                            <div className="form-group">
                             <p>From {oneMessage.sender.email}</p>
                             <p>Message: {oneMessage.message}</p>
                             <input
@@ -175,41 +181,50 @@ function EditProfile(props) {
                                 to={oneMessage.sender._id}
                                 value={messageResponse}
                                 onChange={(e) => setMessageResponse(e.target.value)}
+                                className="form-control"
                             />
-                            <button id={oneMessage._id} type="submit" className="btn">Respond</button>
+                            </div>
+                            <button id={oneMessage._id} type="submit" className="btn btn-primary top-margin1 bottom-margin2">Respond</button>
                             </form>
                         )
                     }
                 </div>
             }
-            
+            </div>
+            <div className=" top-margin2">
             {isHomestager &&
-            <form onSubmit={uploadImage}>
-                <label htmlFor="file">File:</label>
+            <form className="form-hotizontal" onSubmit={uploadImage}>
+            <div className="form-group">
+                <label htmlFor="file">File:
                 <input
                 id="fileUpload"
                 onChange={(e) => {setImageSelected(e.target.files[0]);}}
                 type="file"
                 name="file"
+                className="form-control"
                 />
+                </label>
+                
             {/* <button onClick={uploadImage}>Upload Image</button> */}
                 
-                <button type="submit">Upload Image</button>
+                <button type="submit" className="btn btn-primary left-margin1">Upload Image</button>
+                </div>
             </form>}
 
             {isHomestager &&
-                <div className="portfolio">
+                <div className="portfolio top-margin2 margin-center">
                     {allImages.map((img)=>
                         <div>
                             <Image
                             className="onePicture"
                             cloudName='homestager-react'
                             publicId={img} />
-                            <button id={img} onClick={deleteImage}>Delete</button>
+                            {/* <button id={img} onClick={deleteImage} className="btn btn-primary ">Delete</button> */}
                         </div>
                     )}
                 </div>
             }
+            </div>
             {/* <Image 
                 cloudName='homestager-react'
                 publicId={response.data.url}

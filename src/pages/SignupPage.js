@@ -47,77 +47,104 @@ function SignupPage(props) {
     <div className="SignupPage">
       <h1>Sign Up</h1>
       {!isHomestager &&
-      <form onSubmit={handleSignupSubmit}>
-      <label htmlFor="email">Email:</label>
+      <form onSubmit={handleSignupSubmit} className="form-horizontal">
+      <div className="form-group">
+      <label htmlFor="email">Email:
         <input 
           type="email"
           name="email"
           value={email}
           onChange={handleEmail}
+          className="form-control"
         />
+        </label>
+        </div>
 
-        <label htmlFor="password">Password:</label>
+        <div className="form-group">
+        <label htmlFor="password">Password:
         <input 
           type="password"
           name="password"
           value={password}
           onChange={handlePassword}
+          className="form-control"
         />
+        </label>
+        </div>
 
-        <label htmlFor="name">Name:</label>
+        <div className="form-group">
+        <label htmlFor="name">Name:
         <input 
           type="text"
           name="name"
           value={name}
           onChange={handleName}
+          className="form-control"
         />
-        
-        <button type="submit">Sign Up</button>
+        </label>
+        </div>
+
+        <button type="submit" className="btn btn-primary top-margin2">Sign Up</button>
       </form>
       }
 
       {isHomestager &&
-        <form onSubmit={handleSignupSubmit} enctype="multipart/form-data">
-      <label htmlFor="email">Email:</label>
+        <form onSubmit={handleSignupSubmit} enctype="multipart/form-data" className="form-horizontal">
+      
+        <div className="form-group">
+        <label htmlFor="email">Email:
         <input 
           type="email"
           name="email"
           value={email}
           onChange={handleEmail}
+          className="form-control"
         />
-
-        <label htmlFor="password">Password:</label>
+        </label>
+        </div>
+        <div className="form-group">
+        <label htmlFor="password">Password:
         <input 
           type="password"
           name="password"
           value={password}
           onChange={handlePassword}
+          className="form-control"
         />
-
-        <label htmlFor="name">Name:</label>
+        </label>
+        </div>
+        <div className="form-group">
+        <label htmlFor="name">Name:
         <input 
           type="text"
           name="name"
           value={name}
           onChange={handleName}
+          className="form-control"
         />
-        
-        <label htmlFor="description">Description:</label>
+        </label>
+        </div>
+        <div className="form-group">
+        <label htmlFor="description">Description:
         <input
           type="text"
           name="description"
           value={description}
           onChange={handleDescription}
+          className="form-control"
         />
-
-        <button type="submit">Sign Up</button>
+        </label>
+        </div>
+        <button type="submit" className="btn btn-primary top-margin2">Sign Up</button>
         </form>          
       }
 
       { errorMessage && <p className="error-message">{errorMessage}</p> }
-
+      <br />
       <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
+      <Link to={"/login"}>
+      <button className="btn btn-primary btn-xs">Login</button>
+      </Link>
     </div>
   )
 }

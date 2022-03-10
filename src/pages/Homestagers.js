@@ -14,6 +14,7 @@ function Homestagers(props){
     const [homestagers,setHomestagers] = useState([]);
     const [homestager, setHomestager] = useState(null);
     const [homestagerUserID, setHomestagerUserID] = useState(null);
+    const [homestagerName,setHomestagerName] = useState(null);
     const [userID, setUserID] = useState(null);
     const [allImages, setAllImages] = useState([])
     const [isBrowse, setIsBrowse] = useState(false);
@@ -92,6 +93,7 @@ function Homestagers(props){
         setUserID(e.target.name);
         setHomestagerUserID(e.target.name);
         setShowContact(true);
+        setHomestagerName(e.target.innerHTML);
     }
 
     const contactUser = (e) => {
@@ -130,8 +132,8 @@ function Homestagers(props){
             <div id="homestagers">
             <p>Portfolio</p>
                 {homestagers.map((oneHomestager) =>
-                    <div>
-                    <button id={oneHomestager._id} name={oneHomestager.user._id} onClick={showProfile}>{oneHomestager.user.name}</button>
+                    <div className="box">
+                    <button id={oneHomestager._id} name={oneHomestager.user._id} onClick={showProfile} value={oneHomestager.user.name} className="btn btn-primary btn-xlg">{oneHomestager.user.name}</button>
                     </div>
                 )}
             </div>
@@ -143,24 +145,29 @@ function Homestagers(props){
 
         {showContact &&
             <div>
-                <form onSubmit={sendMessage}>
-                    <label htmlFor='message'>Message: 
-                        <input 
-                            type="text"
-                            name="message"
-                            height="20"
-                            value={message}
-                            onChange={handleMessage}
-                        />
-                    </label>
-                    <button type="submit" >Send</button>
+                <form onSubmit={sendMessage} className="form-horizontal">
+                    <div className="form-group">
+                        <label htmlFor='message'>Message: 
+                            <input 
+                                type="text"
+                                name="message"
+                                height="20"
+                                value={message}
+                                onChange={handleMessage}
+                                className="form-control"
+                            />
+                        </label>
+                        <button type="submit" className="btn btn-primary btn-sm">Send</button>
+                    </div>
+                    
                 </form>
             </div>
         }
 
         {allImages && !isBrowse &&
             <div>
-            
+            <h3>{homestagerName}</h3>
+            <div className="portfolio top-margin2 margin-center">
                 {allImages.map((img)=>
                     <div>
                         <Image
@@ -171,10 +178,11 @@ function Homestagers(props){
                     </div>
                 )}
             </div>
+            </div>
         }
 
         {isBrowse && allImages &&
-            <div>
+            <div className="portfolio top-margin2 margin-center">
             {homestager}
                 {allImages.map((image) => 
                     <div>
