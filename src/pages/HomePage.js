@@ -1,17 +1,23 @@
-import react from 'react';
+import { useState, useContext, useEffect, react } from "react";
+import { AuthContext } from '../context/auth.context';
 
 function HomePage() {
+
+    const { isLoggedIn, user } = useContext(AuthContext);
 
     return(
         <div>
             <h1>HomePage</h1>
-            <div id="searchHomestager" className="box">
-                <a href="/search" className='link'><p>Search Homestager</p></a>
+            {isLoggedIn &&
+            <div>
+                <div id="searchHomestager" className="box">
+                    <a href="/search" className='link'><p>Search Homestager</p></a>
+                </div>
+                <div id="browsePicture" className="box">
+                    <a href="/browse" className='link'><p>Browse picture</p></a>
+                </div>
             </div>
-            <div id="browsePicture" className="box">
-                <a href="/browse" className='link'><p>Browse picture</p></a>
-            </div>
-
+            }
             <div id="login" className="box">
                 <a href="/login" className='link'> <button className='btn'>Login</button></a>
             </div>

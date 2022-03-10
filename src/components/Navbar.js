@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <nav>
       <Link to="/">
-        <button>Home</button>
+        <button className="btn">Home</button>
       </Link>
 
       {isLoggedIn && (

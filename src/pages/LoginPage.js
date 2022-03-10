@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../context/auth.context';
 
 const API_URL = process.env.REACT_APP_API_URL;
-
+console.log(API_URL);
 function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -62,9 +62,6 @@ function LoginPage(props) {
         <button type="submit">Login</button>
       </form>
       { errorMessage && <p className="error-message">{errorMessage}</p> }
-
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
     </div>
   )
 }
