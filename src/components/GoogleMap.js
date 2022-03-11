@@ -22,7 +22,7 @@ function GoogleMap(){
         const destinationLon = 22;
         //const src= "https://www.google.com/maps/embed/v1/place?key=AIzaSyBzsRtSWl4su2hGhKgQp2kRncOiKTEe7A0&q=Space+Needle,Nyíregyháza+Korzó"
         if(isEditProfile){
-            setSrc("https://www.google.com/maps/embed/v1/place?key=AIzaSyBzsRtSWl4su2hGhKgQp2kRncOiKTEe7A0&q=Space+Needle,Nyíregyháza+Korzó");
+            setSrc("https://www.google.com/maps/embed/v1/place?key=AIzaSyBzsRtSWl4su2hGhKgQp2kRncOiKTEe7A0&q=Magyarország+Debrecen");
         }
         if(!isEditProfile){
             setSrc("https://www.google.com/maps/embed/v1/directions?key=AIzaSyBzsRtSWl4su2hGhKgQp2kRncOiKTEe7A0&origin=" + originLat + ',' + originLon + '&destination=' + destinationLat + ',' + destinationLon)

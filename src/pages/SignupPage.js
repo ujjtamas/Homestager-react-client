@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
 const API_URL = process.env.REACT_APP_API_URL;
 
 function SignupPage(props) {
@@ -11,6 +12,8 @@ function SignupPage(props) {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [address, setAddress] = useState("");
+
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const userType = props.usertype;
@@ -21,6 +24,7 @@ function SignupPage(props) {
   const handlePassword = (e) => setPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
   const handleDescription = (e) => setDescription(e.target.value);
+  const handleAddress = (e) => setAddress(e.target.value);
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
@@ -79,6 +83,18 @@ function SignupPage(props) {
           name="name"
           value={name}
           onChange={handleName}
+          className="form-control"
+        />
+        </label>
+        </div>
+
+        <div className="form-group">
+        <label htmlFor="address">Address:
+        <input 
+          type="text"
+          name="address"
+          value={address}
+          onChange={handleAddress}
           className="form-control"
         />
         </label>
